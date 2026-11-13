@@ -263,7 +263,7 @@ export default async function EmployeeProfilePage({
               <CardContent>
                 {education && education.length > 0 ? (
                   <div className="divide-y divide-[#f1f3f5]">
-                    {education.map((edu) => (
+                    {education.map((edu: any) => (
                       <div key={edu.id} className="py-3 first:pt-0 last:pb-0">
                         <div className="flex justify-between items-start">
                           <div>
@@ -290,7 +290,7 @@ export default async function EmployeeProfilePage({
               <CardContent>
                 {experience && experience.length > 0 ? (
                   <div className="divide-y divide-[#f1f3f5]">
-                    {experience.map((exp) => (
+                    {experience.map((exp: any) => (
                       <div key={exp.id} className="py-3 first:pt-0 last:pb-0">
                         <div className="flex justify-between items-start">
                           <div>
@@ -327,7 +327,7 @@ export default async function EmployeeProfilePage({
             <CardContent>
               {documents && documents.length > 0 ? (
                 <div className="divide-y divide-[#f1f3f5]">
-                  {documents.map((doc) => (
+                  {documents.map((doc: any) => (
                     <div key={doc.id} className="flex items-center justify-between py-3">
                       <div className="flex items-center gap-3">
                         <FileText className="h-5 w-5 text-[#5e2b9d]" />

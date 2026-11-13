@@ -164,7 +164,7 @@ export function DataTable<TData, TValue>({
                   key={i}
                   onClick={() => table.setPageIndex(i)}
                   className={cn(
-                    'h-7 w-7 text-xs rounded-[4px] transition-colors',
+                    'h-7 w-7 text-xs rounded-[4px] transition-colors cursor-pointer',
                     isActive
                       ? 'bg-[#5e2b9d] text-white font-medium'
                       : 'text-[#6b7280] hover:bg-[#f1f3f5]'

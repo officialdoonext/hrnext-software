@@ -50,8 +50,8 @@ export default async function SuperAdminDashboardPage() {
         supabase.from('users').select('*', { count: 'exact', head: true }),
         supabase.from('tenants').select('*').order('created_at', { ascending: false }).limit(5),
       ])
-      if (tCount !== null) totalTenants = tCount
-      if (uCount !== null) totalPlatformUsers = uCount
+      if (tCount !== null && tCount !== undefined) totalTenants = tCount
+      if (uCount !== null && uCount !== undefined) totalPlatformUsers = uCount
       if (cData && cData.length > 0) companies = cData as any
     } catch {
       // fallback

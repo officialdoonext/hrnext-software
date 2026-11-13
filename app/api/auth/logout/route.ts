@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
 export async function POST() {
   const cookieStore = await cookies()
+  cookieStore.delete('hrms_session')
   cookieStore.delete('demo_user_session')
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true, redirectUrl: '/login' })
 }
-

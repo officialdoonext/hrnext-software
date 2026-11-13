@@ -198,6 +198,14 @@ export default function LoginPage() {
           >
             {isSubmitting ? 'Signing in...' : 'Sign In'}
           </Button>
+
+          {/* New Tenant Signup Banner */}
+          <div className="pt-2 text-center text-xs text-[#4b5563]">
+            New organization?{' '}
+            <a href="/signup" className="text-[#5e2b9d] font-semibold hover:underline">
+              Register Organization (Neon SaaS) &rarr;
+            </a>
+          </div>
         </form>
 
         {/* Divider */}

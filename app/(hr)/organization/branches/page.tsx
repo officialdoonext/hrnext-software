@@ -24,11 +24,11 @@ export default async function BranchesPage() {
     .eq('employment_status', 'active')
 
   const countMap: Record<string, number> = {}
-  empCounts?.forEach((e) => {
+  empCounts?.forEach((e: any) => {
     if (e.branch_id) countMap[e.branch_id] = (countMap[e.branch_id] ?? 0) + 1
   })
 
-  const enriched = branches?.map((b) => ({
+  const enriched = branches?.map((b: any) => ({
     ...b,
     employee_count: countMap[b.id] ?? 0,
   })) ?? []

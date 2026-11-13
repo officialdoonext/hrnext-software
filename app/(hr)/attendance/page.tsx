@@ -227,7 +227,7 @@ export default async function AttendanceDashboardPage() {
             <CardContent className="pt-0">
               {upcomingHolidays && upcomingHolidays.length > 0 ? (
                 <div className="space-y-3">
-                  {upcomingHolidays.map((h) => (
+                  {upcomingHolidays.map((h: any) => (
                     <div key={h.id} className="flex items-center justify-between py-1 border-b border-[#f1f3f5] last:border-0">
                       <div>
                         <p className="text-xs font-semibold text-[#111827]">{h.name}</p>

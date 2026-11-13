@@ -24,8 +24,28 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, user, navigationType }: AppShellProps) {
-  const [collapsed, setCollapsed] = React.useState(false)
+  const [collapsed, setCollapsed] = React.useState<boolean>(false)
   const pathname = usePathname()
+
+  // Hydrate collapsed state from localStorage after mount
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('hrms_sidebar_collapsed')
+      if (stored !== null) {
+        setCollapsed(stored === 'true')
+      }
+    } catch {}
+  }, [])
+
+  const handleToggleCollapse = React.useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev
+      try {
+        localStorage.setItem('hrms_sidebar_collapsed', String(next))
+      } catch {}
+      return next
+    })
+  }, [])
 
   // Determine active navigation based on explicit navigationType, route pathname, or user role
   const navigation: NavItem[] = React.useMemo(() => {
@@ -47,10 +67,10 @@ export function AppShell({ children, user, navigationType }: AppShellProps) {
         <Sidebar
           navigation={navigation}
           collapsed={collapsed}
-          onToggleCollapse={() => setCollapsed(!collapsed)}
+          onToggleCollapse={handleToggleCollapse}
         />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          <TopNav user={user} />
+          <TopNav user={user} onToggleSidebar={handleToggleCollapse} />
           <main className="flex-1 overflow-y-auto">
             <div className="p-6 max-w-[1400px]">
               {children}
@@ -61,3 +81,5 @@ export function AppShell({ children, user, navigationType }: AppShellProps) {
     </ToasterProvider>
   )
 }
+
+export default AppShell

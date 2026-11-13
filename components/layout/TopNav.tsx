@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Bell, Search, ChevronDown, LogOut, User, Settings } from 'lucide-react'
+import { Bell, Search, ChevronDown, LogOut, User, Settings, Menu } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Avatar } from '@/components/common/Avatar'
 import { Button } from '@/components/ui/button'
@@ -14,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import { createClient } from '@/lib/supabase/client'
 
 interface TopNavProps {
   user?: {
@@ -22,16 +21,15 @@ interface TopNavProps {
     email: string
     role?: string
   }
+  onToggleSidebar?: () => void
 }
 
-export function TopNav({ user }: TopNavProps) {
+export function TopNav({ user, onToggleSidebar }: TopNavProps) {
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSignOut = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
-      await supabase.auth.signOut()
     } catch {
       // ignore
     }
@@ -40,7 +38,19 @@ export function TopNav({ user }: TopNavProps) {
   }
 
   return (
-    <header className="h-14 bg-white border-b border-[#e5e7eb] flex items-center px-4 gap-4 sticky top-0 z-20">
+    <header className="h-14 bg-white border-b border-[#e5e7eb] flex items-center px-4 gap-3 sticky top-0 z-20">
+      {/* Sidebar Toggle Button */}
+      {onToggleSidebar && (
+        <button
+          type="button"
+          onClick={onToggleSidebar}
+          className="p-1.5 rounded-[6px] text-[#6b7280] hover:text-[#111827] hover:bg-[#f1f3f5] transition-colors cursor-pointer"
+          title="Toggle sidebar"
+        >
+          <Menu className="h-4 w-4" />
+        </button>
+      )}
+
       {/* Search */}
       <div className="flex-1 max-w-sm relative">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9ca3af]" />
@@ -60,7 +70,7 @@ export function TopNav({ user }: TopNavProps) {
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-2 px-2 py-1 rounded-[6px] hover:bg-[#f1f3f5] transition-colors outline-none">
+            <button className="flex items-center gap-2 px-2 py-1 rounded-[6px] hover:bg-[#f1f3f5] transition-colors outline-none cursor-pointer">
               <Avatar name={user?.full_name ?? user?.email} size="sm" />
               {user?.full_name && (
                 <div className="hidden md:block text-left">

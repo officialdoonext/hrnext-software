@@ -83,6 +83,49 @@
     font-size: 0.875rem;
   }
 
+  /* Universal interactive cursor pointers */
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="menuitemcheckbox"],
+  [role="menuitemradio"],
+  [role="option"],
+  [role="switch"],
+  [role="checkbox"],
+  [role="radio"],
+  [role="treeitem"],
+  [role="combobox"],
+  a,
+  select,
+  summary,
+  label[for],
+  label:has(input),
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"],
+  [data-radix-collection-item],
+  [data-radix-select-trigger],
+  [data-radix-dropdown-menu-trigger],
+  [data-radix-accordion-trigger],
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  /* Disabled controls always show not-allowed cursor */
+  button:disabled,
+  [disabled],
+  [aria-disabled="true"],
+  input:disabled,
+  select:disabled,
+  textarea:disabled,
+  .disabled {
+    cursor: not-allowed !important;
+  }
+
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 5px;

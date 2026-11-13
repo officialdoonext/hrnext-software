@@ -1,17 +1,25 @@
-import { createClient } from '@/lib/supabase/server'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { CompaniesClient } from './CompaniesClient'
+import { query } from '@/lib/neon/db'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Company Management - Super Admin' }
 
 export default async function SuperAdminCompaniesPage() {
-  const supabase = await createClient()
+  let tenants: any[] = []
 
-  const { data: tenants } = await supabase
-    .from('tenants')
-    .select('*')
-    .order('created_at', { ascending: false })
+  try {
+    const res = await query('SELECT * FROM tenants ORDER BY created_at DESC')
+    tenants = res.rows.map((row) => ({
+      ...row,
+      created_at: row.created_at ? new Date(row.created_at).toISOString() : new Date().toISOString(),
+      subscription_expiry_date: row.subscription_expiry_date
+        ? new Date(row.subscription_expiry_date).toISOString().split('T')[0]
+        : null,
+    }))
+  } catch (err) {
+    console.error('Failed to query tenants from Neon:', err)
+  }
 
   return (
     <div>
@@ -23,8 +31,7 @@ export default async function SuperAdminCompaniesPage() {
           { label: 'Companies' },
         ]}
       />
-      <CompaniesClient initialTenants={tenants ?? []} />
+      <CompaniesClient initialTenants={tenants} />
     </div>
   )
 }
-

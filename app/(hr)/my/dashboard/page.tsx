@@ -144,7 +144,7 @@ export default async function EmployeeDashboardPage() {
             <CardContent className="pt-0">
               {recentAttendance && recentAttendance.length > 0 ? (
                 <div className="divide-y divide-[#f1f3f5]">
-                  {recentAttendance.map((rec) => (
+                  {recentAttendance.map((rec: any) => (
                     <div key={rec.date} className="flex items-center justify-between py-2.5 text-xs">
                       <div>
                         <p className="font-semibold text-[#111827]">{formatDate(rec.date, 'EEEE, dd MMM')}</p>
@@ -185,7 +185,7 @@ export default async function EmployeeDashboardPage() {
             <CardContent className="pt-0">
               {announcements && announcements.length > 0 ? (
                 <div className="space-y-3">
-                  {announcements.map((a) => (
+                  {announcements.map((a: any) => (
                     <div key={a.id} className="p-3 bg-[#f8f9fa] rounded-lg border border-[#e5e7eb]">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-semibold text-[#111827]">{a.title}</span>

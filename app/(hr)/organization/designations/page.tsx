@@ -24,11 +24,11 @@ export default async function DesignationsPage() {
     .eq('employment_status', 'active')
 
   const countMap: Record<string, number> = {}
-  empCounts?.forEach((e) => {
+  empCounts?.forEach((e: any) => {
     if (e.designation_id) countMap[e.designation_id] = (countMap[e.designation_id] ?? 0) + 1
   })
 
-  const enriched = designations?.map((d) => ({
+  const enriched = designations?.map((d: any) => ({
     ...d,
     employee_count: countMap[d.id] ?? 0,
   })) ?? []

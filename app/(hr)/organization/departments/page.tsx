@@ -26,13 +26,13 @@ export default async function DepartmentsPage() {
     .eq('employment_status', 'active')
 
   const countMap: Record<string, number> = {}
-  empCounts?.forEach((e) => {
+  empCounts?.forEach((e: any) => {
     if (e.department_id) {
       countMap[e.department_id] = (countMap[e.department_id] ?? 0) + 1
     }
   })
 
-  const enriched = departments?.map((d) => ({
+  const enriched = departments?.map((d: any) => ({
     ...d,
     employee_count: countMap[d.id] ?? 0,
   })) ?? []

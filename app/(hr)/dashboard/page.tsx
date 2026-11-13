@@ -156,7 +156,7 @@ export default async function DashboardPage() {
             <CardContent className="pt-0">
               {recentEmployees && recentEmployees.length > 0 ? (
                 <div className="divide-y divide-[#f1f3f5]">
-                  {recentEmployees.map((emp) => (
+                  {recentEmployees.map((emp: any) => (
                     <div key={emp.id} className="flex items-center gap-3 py-2.5">
                       <Avatar
                         name={`${emp.first_name} ${emp.last_name}`}
@@ -227,7 +227,7 @@ export default async function DashboardPage() {
             <CardContent className="pt-0">
               {upcomingBirthdays && upcomingBirthdays.length > 0 ? (
                 <div className="space-y-2.5">
-                  {upcomingBirthdays.slice(0, 4).map((emp) => (
+                  {upcomingBirthdays.slice(0, 4).map((emp: any) => (
                     <div key={emp.id} className="flex items-center gap-2.5">
                       <Avatar
                         name={`${emp.first_name} ${emp.last_name}`}

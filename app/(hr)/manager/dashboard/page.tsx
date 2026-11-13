@@ -127,7 +127,7 @@ export default async function ManagerDashboardPage() {
           .eq('date', today)
           .eq('status', 'present')
 
-        if (count !== null) teamPresentCount = count
+        if (typeof count === 'number') teamPresentCount = count
 
         // Pending team leave approvals
         const { data: leaves } = await supabase
